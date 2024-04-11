@@ -25,6 +25,9 @@
                     <label for="birthdate"><span style="color:red;">*</span>BirthDate:</label>
                     <input type="date" name="birthdate" id="birthdate" required>
                 </div>
+                <div class="input-field">
+                <button type="submit" name="checkActors">Check Actors Born on this Day</button>
+                </div>
                 <!-- <br> -->
                 <div class="input-field">
                     <label for="phone"><span style="color:red;">*</span>Phone Number</label>
@@ -82,6 +85,5 @@
         });
   </script>
 
-    
 </body>
 </html>

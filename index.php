@@ -31,7 +31,7 @@
                 <!-- <br> -->
                 <div class="input-field">
                     <label for="phone"><span style="color:red;">*</span>Phone Number</label>
-                    <input type="text" name="phone" id="phone">
+                    <input type="text" name="phone" id="phone" required>
                 </div>
                 <div class="input-field">
                     <label for="address"><span style="color:red;">*</span>Address:</label>

@@ -1,20 +1,22 @@
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.body{
-    font-family: Arial, sans-serif;
-    background-color: #f5fbff;
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5fbff; 
 }
+
 .container{
     width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f1f1f1;
+    background-color: #fff;
 }
 .box{
     width: 400px;
@@ -63,78 +65,10 @@
     border: none;
     border-radius: 5px;
     font-size: 18px;
-    background-color: #e44b8d;
+    /* background-color: #333; */
     color: #fff;
     cursor: pointer;
     outline: none;
+    background-color: #e44b8d;  
+   
 }
-
-
-/*-------------------- header --------------------------*/
-header {
-    background-color:#00072D;
-    color: #fff;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo img {
-      width: 80px;
-      height: auto;
-      margin-right: 10px;
-      border: 2px solid #F4FAFC ;
-      border-radius: 10px
-  }
-  nav ul {
-      list-style-type: none;
-      font-family: Arial, sans-serif; 
-  }
-  nav ul li {
-      display: inline;
-      margin-right: 20px;
-  }
-  nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 20px; 
-      font: bold;
-  }
-  nav ul li a:hover {
-      background-color: #e44b8d;
-      text-decoration: none;
-      font-size: 22px; 
-      padding: 10px 20px; 
-      border-radius: 20px;
-  }
-  
-  
-  /*------------------- footer ----------------- */
-  .image_style {
-      margin-right: 10px;
-      border-radius: 10px; 
-         }
-  .footer_content {
-     background-color:#00072D; 
-     color:white;
-     padding: 20px;
-     text-align: center; 
-     width: 100%;
-  }
-  p{
-     justify-content:center;
-     padding:10px;
-     font-size: 20px;
-  
-  }
-  h4{
-     padding:10px;
-     font-size: 20px;
-  }
-  .location{
-     display: flex; 
-     justify-content:center;
-     flex-direction: column; 
-     align-items: center;
-  
-  }

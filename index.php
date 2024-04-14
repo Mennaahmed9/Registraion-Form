@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+    <?php include "header.php"?>
     <div class="container">
         <div class="box box-form">
             <h3>Registration Form</h3>
@@ -84,6 +85,7 @@
             }
         });
   </script>
+    <?php include "footer.php"?>
 
 </body>
 </html>

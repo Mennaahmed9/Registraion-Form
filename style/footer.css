@@ -1,0 +1,28 @@
+.image_style {
+    margin-right: 10px;
+    border-radius: 10px; 
+       }
+.footer_content {
+   background-color:#00072D; 
+   color:white;
+   padding: 20px;
+   text-align: center; 
+   width: 100%;
+}
+p{
+   justify-content:center;
+   padding:10px;
+   font-size: 20px;
+
+}
+h4{
+   padding:10px;
+   font-size: 20px;
+}
+.location{
+   display: flex; 
+   justify-content:center;
+   flex-direction: column; 
+   align-items: center;
+
+}

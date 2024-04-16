@@ -44,11 +44,11 @@
                 </div>
                 <div class="input-field">
                     <label for="password"><span style="color:red;">*</span>Password:</label>
-                    <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[!@#$%^&*]).{8,}" required oninput="checkPasswordMatch()">
+                    <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[!@#$%^&*/]).{8,}" required oninput="checkPasswordMatch()">
                 </div>
                 <div class="input-field">
                     <label for="confirm_password"><span style="color:red;">*</span>Confirm Password:</label>
-                    <input type="password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[!@#$%^&*]).{8,}" required oninput="checkPasswordMatch()">
+                    <input type="password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[!@#$%^&*/]).{8,}" required oninput="checkPasswordMatch()">
                     <span id="password_match" style="color: red;"></span><br>
                 </div>
                 <div class="input-field">

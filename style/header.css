@@ -1,5 +1,5 @@
-header {
-    background-color:#00072D;
+header{
+    background-color:#014874; 
     color: #fff;
     padding: 20px 40px;
     display: flex;
@@ -28,8 +28,8 @@ header {
       font: bold;
   }
   nav ul li a:hover {
-      background-color: #e44b8d;
-      text-decoration: none;
+    background-color:#014874; 
+    text-decoration: none;
       font-size: 22px; 
       padding: 10px 20px; 
       border-radius: 20px;

@@ -2,19 +2,20 @@
 <html>
 <head>  
 <link rel="stylesheet" href="style/footer.css">
+<link rel="stylesheet" href="style/all.css">
 </head>
 <body>
 
 <footer class="footer_content" id="footer">
     <div>
         <h4>Contact us</h4>
-        <a href="#"><img src="images/Facebook_icon.png" alt="Facebook" class="image_style" width="40px"></a>
-        <a href="#"><img src="images/Twitter_icon.png" alt="Twitter" class="image_style" width="40px"></a>
-        <a href="#"><img src="images/Google_icon.png" alt="Google" class="image_style" width="40px"></a>
-        <a href="#"><img src="images/Gmail_icon.png" alt="Gmail" class="image_style" width="40px"></a>
+        <a href="#"><i class="fa-brands fa-facebook facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter  twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-google google"></i></a>
+        <a href="#"><i class="fa-solid fa-envelope  email"></i></a>
     </div>
     <div class=location>
-        <h4> <img src="images/location_icon.png" alt="Facebook" class="image_style" width="20px" display=flex;>location</h4>
+        <h4> <i class="fa-solid fa-location-dot location-icon"></i>location</h4>
         <p>Cairo university,Giza</p>
     </div>
     <div>

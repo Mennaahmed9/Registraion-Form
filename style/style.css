@@ -7,7 +7,6 @@
 
 .body {
     font-family: Arial, sans-serif;
-    background-color: #f5fbff; 
 }
 
 .container{
@@ -16,7 +15,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: #f1f7fa;
 }
 .box{
     width: 400px;
@@ -69,6 +68,5 @@
     color: #fff;
     cursor: pointer;
     outline: none;
-    background-color: #e44b8d;  
-   
+    background-color:#014874; 
 }

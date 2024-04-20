@@ -16,17 +16,28 @@
             <form id="userForm" action= "" method = "post"> 
                 <div class="input-field">
                     <label for="name"><span style="color:red;">*</span>Full Name:</label>
-                    <input type="text" name="name" id="name" pattern="[a-zA-Z\s]+" required>
+                    <input type="text" name="name" id="name" pattern="[a-zA-Z\s]+" required value="<?php echo isset($_SESSION['registration_data']['name']) ? $_SESSION['registration_data']['name'] : ''; ?>">
+
                 </div>
                 <!-- <br> -->
                 <div class="input-field">
                     <label for="user"><span style="color:red;">*</span>User Name:</label>
-                    <input type="text" name="user" id="user" required>
+                    <input type="text" name="user" id="user" required value="<?php echo isset($_SESSION['registration_data']['user']) ? $_SESSION['registration_data']['user'] : ''; ?>">
+                    <span id="username_status" style="color: red;"></span>
                 </div>
+                <?php
+                if (isset($_SESSION['status'])) {
+                // Display the warning message
+                echo '<div class="alert">' . $_SESSION['status'] . '</div>';
+                // Unset or clear the session variable after displaying the message
+                unset($_SESSION['status']);
+            }
+            ?>
+
                 <!-- <br> -->
                 <div class="input-field">
                     <label for="birthdate"><span style="color:red;">*</span>BirthDate:</label>
-                    <input type="date" name="birthdate" id="birthdate" required>
+                    <input type="date" name="birthdate" id="birthdate" required value="<?php echo isset($_SESSION['registration_data']['birthdate']) ? $_SESSION['registration_data']['birthdate'] : ''; ?>">
                 </div>
                 <div class="input-field">
                 <button type="submit" name="checkActors">Check Actors Born on this Day</button>
@@ -34,31 +45,31 @@
                 <!-- <br> -->
                 <div class="input-field">
                     <label for="phone"><span style="color:red;">*</span>Phone Number</label>
-                    <input type="text" name="phone" id="phone" required>
+                    <input type="text" name="phone" id="phone" required value="<?php echo isset($_SESSION['registration_data']['phone']) ? $_SESSION['registration_data']['phone'] : ''; ?>">
                 </div>
                 <div class="input-field">
                     <label for="address"><span style="color:red;">*</span>Address:</label>
-                    <input type="text" name="address" id="address" required>
+                    <input type="text" name="address" id="address" required value="<?php echo isset($_SESSION['registration_data']['address']) ? $_SESSION['registration_data']['address'] : ''; ?>"> 
                 </div>
                 <div class="input-field">
                     <label for="email"><span style="color:red;">*</span>Email:</label>
-                    <input type="email" name="email" id="email" required>
+                    <input type="email" name="email" id="email" required value="<?php echo isset($_SESSION['registration_data']['email']) ? $_SESSION['registration_data']['email'] : ''; ?>">
                 </div>
                 <div class="input-field">
                     <label for="password"><span style="color:red;">*</span>Password:</label>
-                    <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[!@#$%^&*/]).{8,}" required oninput="checkPasswordMatch()">
+                    <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[!@#$%^&*/]).{8,}" required oninput="checkPasswordMatch()" value="<?php echo isset($_SESSION['registration_data']['password']) ? $_SESSION['registration_data']['password'] : ''; ?>">
                 </div>
                 <div class="input-field">
                     <label for="confirm_password"><span style="color:red;">*</span>Confirm Password:</label>
-                    <input type="password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[!@#$%^&*/]).{8,}" required oninput="checkPasswordMatch()">
+                    <input type="password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[!@#$%^&*/]).{8,}" required oninput="checkPasswordMatch()" value="<?php echo isset($_SESSION['registration_data']['confirm_password']) ? $_SESSION['registration_data']['confirm_password'] : ''; ?>">
                     <span id="password_match" style="color: red;"></span><br>
                 </div>
                 <div class="input-field">
                     <label for="image"><span style="color:red;">*</span>Image:</label>
-                    <input type="file"  name="image" id="image">
+                    <input type="file"  name="image" id="image" value="<?php echo isset($_SESSION['registration_data']['image']) ? $_SESSION['registration_data']['image'] : ''; ?>">
                 </div>
                 <div class="input-field">
-                    <button type="submit" name = "registerUser">Register</button>
+                    <button type="submit" id="registerButton" name = "registerUser">Register</button>
                 </div>
             </form>
 
@@ -66,6 +77,13 @@
     </div>
 
     <script>
+        window.onload = function() {
+    // Clear form fields when the page is loaded
+    <?php
+    unset($_SESSION['registration_data']);
+    ?>
+
+    };
         function checkPasswordMatch() {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm_password').value;
@@ -86,6 +104,8 @@
                 document.getElementById('password_match').innerText = 'Password does not match';
             }
         });
+        
+        
   </script>
     <?php include "footer.php"?>
 

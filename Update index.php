@@ -1,3 +1,4 @@
+<?php include "DB_Ops.php"?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +58,7 @@
                     <input type="file"  name="image" id="image">
                 </div>
                 <div class="input-field">
-                    <button type="submit">Register</button>
+                    <button type="submit" name = "registerUser">Register</button>
                 </div>
             </form>
 

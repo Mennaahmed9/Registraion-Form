@@ -7,6 +7,17 @@
     <title>Registration Page</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/all.css">
+    <style>
+        #file-preview {
+            margin-top: 20px;
+            display: none;
+        }
+        .undo-button {
+            margin-top: 10px;
+            cursor: pointer;
+            color: #1f0525;
+        }
+    </style>
 </head>
 <body>
     <?php include "header.php"?>
@@ -66,7 +77,14 @@
                 </div>
                 <div class="input-field">
                     <label for="image"><span style="color:red;">*</span>Image:</label>
-                    <input type="file"  name="image" id="image" value="<?php echo isset($_SESSION['registration_data']['image']) ? $_SESSION['registration_data']['image'] : ''; ?>">
+                    <label class="file-input-wrapper">
+                        <i class="fas fa-upload"></i> Choose File
+                        <input type="file" name="image" id="image" value="<?php echo isset($_SESSION['registration_data']['image']) ? $_SESSION['registration_data']['image'] : ''; ?>" accept="image/png, image/jpeg" onchange="previewImage()">
+                    </label>
+                    <div id="file-preview"></div>
+                    <div id="undo-container" style="display: none;">
+                        <span class="undo-button" onclick="clearSelection()">Clear Selection</span>
+                    </div>
                 </div>
                 <div class="input-field">
                     <button type="submit" id="registerButton" name = "registerUser">Register</button>

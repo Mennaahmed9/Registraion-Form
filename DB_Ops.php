@@ -1,17 +1,6 @@
 <?php
 session_start();
 
-// Initializing variables
-$name = "";
-$user = "";
-$birthdate = "";
-$phone = 0;
-$address = "";
-$email = "";
-$password = "";
-$confirm_password = "";
-$errors = array();
-
 // Connect to the database
 $database = mysqli_connect('localhost', 'root', '', 'registrationwebsiteuser');
 
@@ -58,7 +47,6 @@ if (isset($_POST['registerUser'])) {
 
     // Check if user already exists
     $userCheckQuery = "SELECT * FROM users WHERE Username = '$user' LIMIT 1";
-
     // Execute the SQL query
     $result = mysqli_query($database, $userCheckQuery);
 
@@ -66,11 +54,8 @@ if (isset($_POST['registerUser'])) {
     if ($result) {
         // Check if any rows are returned
         if (mysqli_num_rows($result) > 0) {
-            // User already exists
-            $foundUser = mysqli_fetch_assoc($result);
-            if ($foundUser['Username'] == $user) {
-                array_push($errors, "Username already exists");
-            }
+            $_SESSION['registration_data'] = $_POST;
+            $_SESSION['status'] = "Username already taken. Please try another one!";
         } else {
             // No errors found then continue registration process
             // Place password in database encrypted
@@ -85,8 +70,7 @@ if (isset($_POST['registerUser'])) {
                 // Set session variables and redirect to success page
                 $_SESSION['user'] = $user;
                 $_SESSION['success'] = "You are now registered!";
-                header('location: index.php'); // Redirect to success page
-                exit();
+                // header('location: index.php'); // Redirect to success page
             } else {
                 echo "Error: " . mysqli_error($database);
             }

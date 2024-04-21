@@ -8,12 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
 
-        // Check if the file already exists
-        if (file_exists($targetFile)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
-        }
-
         // Check file size
         if ($_FILES["image"]["size"] > 5000000) {
             echo "Sorry, your file is too large.";
@@ -21,9 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         }
 
         // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+            echo "Sorry, only JPG, JPEG & PNG files are allowed.";
             $uploadOk = 0;
         }
 
@@ -36,8 +29,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                 // File uploaded successfully, now insert image name into database
                 $imageName = basename($_FILES["image"]["name"]);
                 // Your database connection and insert query here
+                $database = mysqli_connect('localhost', 'root', '', 'registrationwebsiteuser');
                 // Example: $sql = "INSERT INTO images (image_name) VALUES ('$imageName')";
-                echo "The file ". htmlspecialchars( basename( $_FILES["image"]["name"])). " has been uploaded.";
+                $user = mysqli_real_escape_string($database, $_POST['user']);
+                $query = "INSERT INTO image (Username,ImageName)VALUES ('$user','$imageName')";
+                // Execute the SQL query
+                if (mysqli_query($database, $query)) {
+                    echo "The file ". htmlspecialchars( basename( $_FILES["image"]["name"])). " has been uploaded.";
+                } else {
+                    echo "Error: " . mysqli_error($database);
+                }
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }
@@ -47,31 +48,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     }
 }
 ?>
-<script>
-    function previewImage() {
-        var fileInput = document.getElementById('image');
-        var file = fileInput.files[0];
-        var fileReader = new FileReader();
-
-        fileReader.onload = function(e) {
-            var img = document.createElement('img');
-            img.src = e.target.result;
-            img.style.maxWidth = '100%';
-            img.style.maxHeight = '200px'; // Adjust as needed
-            document.getElementById('file-preview').innerHTML = '';
-            document.getElementById('file-preview').appendChild(img);
-            document.getElementById('file-preview').style.display = 'block';
-            document.getElementById('undo-container').style.display = 'block';
-        };
-
-        fileReader.readAsDataURL(file);
-    }
-
-    function clearSelection() {
-        document.getElementById('image').value = '';
-        document.getElementById('file-preview').innerHTML = '';
-        document.getElementById('file-preview').style.display = 'none';
-        document.getElementById('undo-container').style.display = 'none';
-    }
-</script>
 

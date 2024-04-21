@@ -1,6 +1,6 @@
 <?php
 // Check if the form was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registerUser"])) {
     // Check if a file was uploaded without errors
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
         $targetDir = "uploads/"; // Directory where you want to store the uploaded images

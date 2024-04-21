@@ -14,7 +14,7 @@
     <div class="container">
         <div class="box box-form">
             <h3>Registration Form</h3>
-            <form id="userForm" action= "" method = "post"> 
+            <form id="userForm" action= "" method = "post" enctype="multipart/form-data">
                 <div class="input-field">
                     <label for="name"><span style="color:red;">*</span>Full Name:</label>
                     <input type="text" name="name" id="name" pattern="[a-zA-Z\s]+" required value="<?php echo isset($_SESSION['registration_data']['name']) ? $_SESSION['registration_data']['name'] : ''; ?>">

@@ -95,7 +95,7 @@
         function checkPasswordMatch() {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm_password').value;
-            const passwordMatchError = document.getElementById('password_match');
+            const passwordMatchError = document.getElementById('password_match').value;
             if (password !== confirmPassword) {
                 passwordMatchError.innerText = 'Password does not match';
             } else {

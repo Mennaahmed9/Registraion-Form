@@ -3,14 +3,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/all.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <?php include "header.php"?>
+    <?php include "API_Ops.php"?>
+    <script>
+        function callPhpFunction() {
+            $.ajax({
+                url: 'API_Ops.php',
+                type: 'POST',
+                data: { functionName: 'printActors', date: document.getElementById("birthdate").value },
+                success: function(response) {
+                    // Handle response from PHP function
+                    document.getElementById('output').innerHTML += response;
+                    //alert(response);
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        }
+
+    </script>
     <div class="container">
         <div class="box box-form">
             <h3>Registration Form</h3>
@@ -41,8 +64,12 @@
                     <input type="date" name="birthdate" id="birthdate" required value="<?php echo isset($_SESSION['registration_data']['birthdate']) ? $_SESSION['registration_data']['birthdate'] : ''; ?>">
                 </div>
                 <div class="input-field">
-                <button type="submit" name="checkActors">Check Actors Born on this Day</button>
+                <button type="button" name="click" id = "checkActors" onclick="callPhpFunction()">Check Actors Born on this Day</button>
                 </div>
+                <div id="output"></div>
+                <!--<div class="input-field">
+                <button type="submit" name="checkActors">Check Actors Born on this Day</button>
+                </div>-->
                 <!-- <br> -->
                 <div class="input-field">
                     <label for="phone"><span style="color:red;">*</span>Phone Number</label>
@@ -92,52 +119,53 @@
     ?>
 
     };
-        function checkPasswordMatch() {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm_password').value;
-            const passwordMatchError = document.getElementById('password_match').value;
-            if (password !== confirmPassword) {
-                passwordMatchError.innerText = 'Password does not match';
-            } else {
-                passwordMatchError.innerText = '';
-            }
+    
+    function checkPasswordMatch() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        const passwordMatchError = document.getElementById('password_match').value;
+        if (password !== confirmPassword) {
+            passwordMatchError.innerText = 'Password does not match';
+        } else {
+            passwordMatchError.innerText = '';
         }
+    }
 
-        // Prevent form submission if passwords don't match
-        document.getElementById('userForm').addEventListener('submit', function(event) {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm_password').value;
-            if (password !== confirmPassword) {
-                event.preventDefault(); // Prevent form submission
-                document.getElementById('password_match').innerText = 'Password does not match';
-            }
-        });
-
-        function previewImage() {
-            var fileInput = document.getElementById('image');
-            var file = fileInput.files[0];
-            var fileReader = new FileReader();
-
-            fileReader.onload = function(e) {
-                var img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.maxWidth = '100%';
-                img.style.maxHeight = '200px'; // Adjust as needed
-                document.getElementById('file-preview').innerHTML = '';
-                document.getElementById('file-preview').appendChild(img);
-                document.getElementById('file-preview').style.display = 'block';
-                document.getElementById('undo-container').style.display = 'block';
-            };
-
-            fileReader.readAsDataURL(file);
+    // Prevent form submission if passwords don't match
+    document.getElementById('userForm').addEventListener('submit', function(event) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        if (password !== confirmPassword) {
+            event.preventDefault(); // Prevent form submission
+            document.getElementById('password_match').innerText = 'Password does not match';
         }
+    });
 
-        function clearSelection() {
-            document.getElementById('image').value = '';
+    function previewImage() {
+        var fileInput = document.getElementById('image');
+        var file = fileInput.files[0];
+        var fileReader = new FileReader();
+
+        fileReader.onload = function(e) {
+            var img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '200px'; // Adjust as needed
             document.getElementById('file-preview').innerHTML = '';
-            document.getElementById('file-preview').style.display = 'none';
-            document.getElementById('undo-container').style.display = 'none';
-        }
+            document.getElementById('file-preview').appendChild(img);
+            document.getElementById('file-preview').style.display = 'block';
+            document.getElementById('undo-container').style.display = 'block';
+        };
+
+        fileReader.readAsDataURL(file);
+    }
+
+    function clearSelection() {
+        document.getElementById('image').value = '';
+        document.getElementById('file-preview').innerHTML = '';
+        document.getElementById('file-preview').style.display = 'none';
+        document.getElementById('undo-container').style.display = 'none';
+    }
   </script>
     <?php include "footer.php"?>
 

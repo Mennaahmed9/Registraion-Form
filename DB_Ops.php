@@ -1,83 +1,58 @@
 <?php
-session_start();
+class DB_ops {
+    private $database;
 
-// Connect to the database
-$database = mysqli_connect('localhost', 'root', '', 'registrationwebsiteuser');
-
-// Register user
-if (isset($_POST['registerUser'])) {
-    // receive all input values from the form
-    $name = mysqli_real_escape_string($database, $_POST['name']);
-    $user = mysqli_real_escape_string($database, $_POST['user']);
-    $birthdate = mysqli_real_escape_string($database, $_POST['birthdate']);
-    $phone = mysqli_real_escape_string($database, $_POST['phone']);
-    $address = mysqli_real_escape_string($database, $_POST['address']);
-    $email = mysqli_real_escape_string($database, $_POST['email']);
-    $password = mysqli_real_escape_string($database, $_POST['password']);
-    $confirm_password = mysqli_real_escape_string($database, $_POST['confirm_password']);
-
-    // Form validation that everything was filled correctly by the user
-    if (empty($name)) {
-        array_push($errors, "Full name is required");
-    }
-    if (empty($user)) {
-        array_push($errors, "Username is required");
-    }
-    if (empty($birthdate)) {
-        array_push($errors, "Birth Date is required");
-    }
-    if (empty($phone)) {
-        array_push($errors, "Phone number is required");
-    }
-    if (empty($address)) {
-        array_push($errors, "Address is required");
-    }
-    if (empty($email)) {
-        array_push($errors, "Email is required");
-    }
-    if (empty($password)) {
-        array_push($errors, "Password is required");
-    }
-    if (empty($confirm_password)) {
-        array_push($errors, "Confirming your password is required");
-    }
-    if ($password != $confirm_password) {
-        array_push($errors, "The two passwords do not match");
+    public function __construct($database) {
+        $this->database = $database;
     }
 
-    // Check if user already exists
-    $userCheckQuery = "SELECT * FROM users WHERE Username = '$user' LIMIT 1";
-    // Execute the SQL query
-    $result = mysqli_query($database, $userCheckQuery);
+    public function registerUser($name, $user, $birthdate, $phone, $address, $email, $password, $confirm_password) {
+        // Form validation that everything was filled correctly by the user
+        $errors = array();
+        if (empty($name)) {
+            array_push($errors, "Full name is required");
+        }
+        if (empty($user)) {
+            array_push($errors, "Username is required");
+        }
+        if (empty($birthdate)) {
+            array_push($errors, "Birth Date is required");
+        }
+        if (empty($phone)) {
+            array_push($errors, "Phone number is required");
+        }
+        if (empty($address)) {
+            array_push($errors, "Address is required");
+        }
+        if (empty($email)) {
+            array_push($errors, "Email is required");
+        }
+        if (empty($password)) {
+            array_push($errors, "Password is required");
+        }
+        if (empty($confirm_password)) {
+            array_push($errors, "Confirming your password is required");
+        }
+        if ($password != $confirm_password) {
+            array_push($errors, "The two passwords do not match");
+        }
 
-    // Check if query execution was successful
-    if ($result) {
-        // Check if any rows are returned
-        if (mysqli_num_rows($result) > 0) {
-            $_SESSION['registration_data'] = $_POST;
-            $_SESSION['status'] = "Username already taken. Please try another one!";
+        // Check if user already exists
+        $userCheckQuery = "SELECT * FROM users WHERE Username = '$user' LIMIT 1";
+        $result = mysqli_query($this->database, $userCheckQuery);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            return "Username already taken. Please try another one!";
         } else {
             // No errors found then continue registration process
-            // Place password in database encrypted
             $password = md5($password);
-            // Insert user data into the database
             $query = "INSERT INTO users (`Full Name`, `Username`, `BirthDate`, `PhoneNumber`, `Address`, `Email`, `Password`) 
                       VALUES ('$name', '$user', '$birthdate', '$phone', '$address', '$email', '$password')";
-
-            // Execute the SQL query
-            if (mysqli_query($database, $query)) {
-                echo "User inserted successfully!";
-                // Set session variables and redirect to success page
-                $_SESSION['user'] = $user;
-                $_SESSION['success'] = "You are now registered!";
-                // header('location: index.php'); // Redirect to success page
+            if (mysqli_query($this->database, $query)) {
+                return "User inserted successfully!";
             } else {
-                echo "Error: " . mysqli_error($database);
+                return "Error: " . mysqli_error($this->database);
             }
         }
-    } else {
-        // Query execution failed
-        echo "Error: " . mysqli_error($database);
     }
 }
-?>

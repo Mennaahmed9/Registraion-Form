@@ -1,5 +1,4 @@
 <?php include "DB_Ops_Controller.php"?>
-<?php include "Upload.php"?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,7 +95,7 @@
                     <label for="image"><span style="color:red;">*</span>Image:</label>
                     <label class="file-input-wrapper">
                         <i class="fas fa-upload"></i> Choose File
-                        <input type="file" name="image" id="image" value="<?php echo isset($_SESSION['registration_data']['image']) ? $_SESSION['registration_data']['image'] : ''; ?>" accept="image/png, image/jpeg, image/jpg" onchange="previewImage()">
+                        <input type="file" name="image" id="image" required value="<?php echo isset($_SESSION['registration_data']['image']) ? $_SESSION['registration_data']['image'] : ''; ?>" accept="image/png, image/jpeg, image/jpg" onchange="previewImage()">
                     </label>
                     <div id="file-preview"></div>
                     <div id="undo-container" style="display: none;">
@@ -112,7 +111,7 @@
     </div>
 
     <script>
-        window.onload = function() {
+    window.onload = function() {
     // Clear form fields when the page is loaded
     <?php
     unset($_SESSION['registration_data']);

@@ -17,6 +17,7 @@ if (isset($_POST['registerUser'])) {
 
     $result = $db_ops->registerUser($name, $user, $birthdate, $phone, $address, $email, $password, $confirm_password);
     if (strpos($result, 'successfully') !== false) {
+        include('upload.php');
         $_SESSION['user'] = $user;
         $_SESSION['success'] = "You are now registered!";
         // header('location: index.php'); // Redirect to success page
@@ -25,4 +26,3 @@ if (isset($_POST['registerUser'])) {
         $_SESSION['status'] = $result;
     }
 }
-

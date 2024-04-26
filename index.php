@@ -60,7 +60,7 @@
                 <!-- <br> -->
                 <div class="input-field">
                     <label for="birthdate"><span style="color:red;">*</span>BirthDate:</label>
-                    <input type="date" name="birthdate" id="birthdate" required value="<?php echo isset($_SESSION['registration_data']['birthdate']) ? $_SESSION['registration_data']['birthdate'] : ''; ?>">
+                    <input type="date" name="birthdate" id="birthdate" required max="" value="<?php echo isset($_SESSION['registration_data']['birthdate']) ? $_SESSION['registration_data']['birthdate'] : ''; ?>">
                 </div>
                 <div class="input-field">
                 <button type="button" name="click" id = "checkActors" onclick="callPhpFunction()">Check Actors Born on this Day</button>
@@ -118,7 +118,16 @@
     ?>
 
     };
-    
+
+    // Get today's date
+    var today = new Date();
+    // Set the max attribute of the input element to today's date
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    document.getElementById("birthdate").setAttribute("max", today);
     function checkPasswordMatch() {
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm_password').value;

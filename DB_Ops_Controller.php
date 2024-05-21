@@ -2,7 +2,7 @@
 session_start();
 include('DB_ops.php');
 
-$database = mysqli_connect('localhost', 'root', '', 'registrationwebsiteuser');
+$database = mysqli_connect('localhost', 'root', '', 'registredusers');
 $db_ops = new DB_ops($database);
 
 if (isset($_POST['registerUser'])) {

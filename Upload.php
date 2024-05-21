@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registerUser"])) {
         $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
         {
             // Form validation that everything was filled correctly by the user
-            $database = mysqli_connect('localhost', 'root', '', 'registrationwebsiteuser');
+            $database = mysqli_connect('localhost', 'root', '', 'registredusers');
 
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
                     // File uploaded successfully, now insert image name into database

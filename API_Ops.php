@@ -26,7 +26,7 @@ function getActorsBornToday($date) {
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "X-RapidAPI-Host: online-movie-database.p.rapidapi.com",
-            "X-RapidAPI-Key: a82b4badd5mshb664fc4260b282cp1ed163jsnd69d80e2cf6a"
+            "X-RapidAPI-Key: 6aaea6f370mshc4042bcb2c34f72p10493ejsn6e2fa63e0767"
         ],
     ]);
     
@@ -61,7 +61,7 @@ function getActorBio($actorId){
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "X-RapidAPI-Host: online-movie-database.p.rapidapi.com",
-            "X-RapidAPI-Key: a82b4badd5mshb664fc4260b282cp1ed163jsnd69d80e2cf6a"
+            "X-RapidAPI-Key: 6aaea6f370mshc4042bcb2c34f72p10493ejsn6e2fa63e0767"
         ],
     ]);
     
